@@ -7,7 +7,7 @@
  */
 export default function parseUrl (url) {
   // Default values
-  const defaultHost = 'http://localhost:3000'
+  const defaultHost = process.env.NEXT_PUBLIC_NEXTAUTH_URL || 'http://localhost:3000'
   const defaultPath = '/api/auth'
 
   if (!url) { url = `${defaultHost}${defaultPath}` }
