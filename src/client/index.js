@@ -317,7 +317,7 @@ export function Provider({ children, session, options }) {
 async function _fetchData(path, { ctx, req = ctx?.req } = {}) {
   try {
     const baseUrl = await _apiBaseUrl()
-    const options = req ? { headers: { cookie: req.headers.cookie } } : {}
+    const options = req ? { headers: { cookie: req.headers.cookie } } : {credentials: 'include'}
     const res = await fetch(`${baseUrl}/${path}`, options)
     const data = await res.json()
     if (!res.ok) throw data
