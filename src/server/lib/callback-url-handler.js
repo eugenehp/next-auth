@@ -29,5 +29,11 @@ export default async function callbackUrlHandler (req, res) {
     cookie.set(res, cookies.callbackUrl.name, callbackUrl, cookies.callbackUrl.options)
   }
 
+  // Save callback URL in a cookie so that can be used for subsequent requests in signin/signout/callback flow
+  // but this one uses callbackUrl HTTP GET param to overwrite it
+  if (callbackUrlParamValue && (callbackUrl !== callbackUrlParamValue)) {
+    cookie.set(res, cookies.callbackUrl.name, callbackUrlParamValue, cookies.callbackUrl.options)
+  }
+
   req.options.callbackUrl = callbackUrl
 }
