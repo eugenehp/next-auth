@@ -11,6 +11,10 @@ export default async function getAuthorizationUrl (req) {
     ...req.query
   }
 
+  // add callbackUrl into the callbackUrl sent to the OAuth component
+  if(req.options.callbackUrl)
+    provider.callbackUrl = provider.callbackUrl + `?callbackUrl=` + encodeURIComponent(req.options.callbackUrl)
+
   const client = oAuthClient(provider)
   if (provider.version?.startsWith('2.')) {
     // Handle OAuth v2.x
